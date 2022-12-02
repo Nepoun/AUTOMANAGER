@@ -13,12 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.hateoas.RepresentationModel;
 
-import lombok.Data;
+import com.autobots.automanager.models.ErrorInfo;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
-public class Client{
+public class Client extends RepresentationModel<Client> implements ErrorInfo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -38,6 +43,7 @@ public class Client{
 	private List<Telephone> telephone = new ArrayList<>();
 
 
-
-	
+	public String getObjectName() {
+		return getName();
+	}
 }

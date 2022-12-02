@@ -6,11 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
-@Data
+import com.autobots.automanager.models.ErrorInfo;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
-public class Document {
+public class Document extends RepresentationModel<Document> implements ErrorInfo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -19,5 +26,7 @@ public class Document {
 	@Column(unique = true)
 	private String number;
 	
-
+	public String getObjectName() {
+		return getDocumentType();
+	}
 }
